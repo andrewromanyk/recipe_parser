@@ -1,18 +1,10 @@
 use pest::Parser;
 use recipe_parser::*;
+use pest::iterators::Pairs;
 
 #[cfg(test)]
 mod tests{
-    use pest::iterators::Pairs;
     use super::*;
-
-    mod strings {
-
-
-    }
-    mod numeric {
-
-    }
 
     #[test]
     fn test_measurements() -> anyhow::Result<()> {
