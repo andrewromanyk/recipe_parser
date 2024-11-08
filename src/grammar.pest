@@ -1,25 +1,26 @@
-anySpaces = { ("\t" | WHITE_SPACE | NEWLINE)* }
+anySpaces = _{ ("\t" | " " | "\n")* } //WHITE_SPACE
+space = _{" "}
+myANY = _{ CYRILLIC | ASCII_ALPHA }
 
-fullTitleText = {ASCII_ALPHA ~ (WHITE_SPACE* ~ ASCII_ALPHA)*}
-titleAfterSpace = {WHITE_SPACE? ~ fullTitleText}
+fullText = {myANY ~ (space* ~ myANY)*}
+titleAfterSpace = {WHITE_SPACE? ~ fullText}
 
-fullText = {ASCII_ALPHA ~ ANY*}
-textAfterSpace = {WHITE_SPACE? ~ fullText}
+textAfterSpace = {space? ~ fullText}
 
 anyNumber = {ASCII_DIGIT+ ~ (("." | ",") ~ ASCII_DIGIT+)?}
 
-recipeTitle = {"Страва:"}
+recipeTitle = _{"Страва:"}
 recipeTitleFull = {anySpaces ~ recipeTitle ~ titleAfterSpace}
 
-recipeDescription = {"Опис:"}
+recipeDescription = _{"Опис:"}
 recipeDescriptionFull = {anySpaces ~ recipeDescription ~ textAfterSpace}
 
-recipeIngredientsTitle = {"Інгредієнти:"}
-amountAndUnit = {anyNumber ~ WHITE_SPACE ~ fullTitleText}
-ingredientRow = {fullTitleText ~ " - " ~ amountAndUnit}
+recipeIngredientsTitle = _{"Інгредієнти:"}
+amountAndUnit = {anyNumber ~ space ~ fullText}
+ingredientRow = {fullText ~ " - " ~ amountAndUnit}
 recipeIngredientsFull = {anySpaces ~ recipeIngredientsTitle ~ (anySpaces ~ ingredientRow)+}
 
-recipeInstructionsTitle = {"Приготування:" | "Рецепт:"}
+recipeInstructionsTitle = _{"Приготування:" | "Рецепт:"}
 recipeInstructionsFull = {anySpaces ~ recipeInstructionsTitle ~ (anySpaces ~ "- " ~ fullText)+}
 
 recipeFull = {recipeTitleFull ~  recipeDescriptionFull ~ recipeIngredientsFull ~ recipeInstructionsFull}
