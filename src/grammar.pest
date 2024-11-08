@@ -3,7 +3,7 @@ space = _{" "}
 myANY = _{ CYRILLIC | ASCII_ALPHA }
 
 fullText = {myANY ~ (space* ~ myANY)*}
-titleAfterSpace = {WHITE_SPACE? ~ fullText}
+titleAfterSpace = {space? ~ fullText}
 
 textAfterSpace = {space? ~ fullText}
 
