@@ -1,26 +1,30 @@
-anySpaces = _{ ("\t" | " " | "\n")* } //WHITE_SPACE
+// Basic
+anySpace = _{("\t" | " " | "\n")}
+anySpaces = _{ anySpace* } //WHITE_SPACE
+minimumSpaces = _{anySpace{0,3}}
 space = _{" "}
 myANY = _{ CYRILLIC | ASCII_ALPHA }
+delimiter = _{"-"}
+spacedDelimiter = _{minimumSpaces ~ delimiter ~ minimumSpaces}
 
+//Basic deriving
 fullText = {myANY ~ (space* ~ myANY)*}
-titleAfterSpace = {space? ~ fullText}
-
 textAfterSpace = {space? ~ fullText}
-
 anyNumber = {ASCII_DIGIT+ ~ (("." | ",") ~ ASCII_DIGIT+)?}
 
+//Separate parts of the recipe
 recipeTitle = _{"Страва:"}
-recipeTitleFull = {anySpaces ~ recipeTitle ~ titleAfterSpace}
+recipeTitleFull = {anySpaces ~ recipeTitle ~ textAfterSpace}
 
 recipeDescription = _{"Опис:"}
 recipeDescriptionFull = {anySpaces ~ recipeDescription ~ textAfterSpace}
 
 recipeIngredientsTitle = _{"Інгредієнти:"}
 amountAndUnit = {anyNumber ~ space ~ fullText}
-ingredientRow = {fullText ~ " - " ~ amountAndUnit}
+ingredientRow = {fullText ~ spacedDelimiter ~ amountAndUnit}
 recipeIngredientsFull = {anySpaces ~ recipeIngredientsTitle ~ (anySpaces ~ ingredientRow)+}
 
 recipeInstructionsTitle = _{"Приготування:" | "Рецепт:"}
-recipeInstructionsFull = {anySpaces ~ recipeInstructionsTitle ~ (anySpaces ~ "- " ~ fullText)+}
+recipeInstructionsFull = {anySpaces ~ recipeInstructionsTitle ~ (anySpaces ~ spacedDelimiter ~ fullText)+}
 
 recipeFull = {recipeTitleFull ~  recipeDescriptionFull ~ recipeIngredientsFull ~ recipeInstructionsFull}
