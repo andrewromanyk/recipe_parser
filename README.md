@@ -1,4 +1,4 @@
-# recipe_parser
+# recipe_parser_andrewromanyk
 
 A parser for food recipes. Divides recipes into: name, description, ingredients and instructions.
 

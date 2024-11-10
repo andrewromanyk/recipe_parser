@@ -144,7 +144,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "recipe_parser"
+name = "recipe_parser_andrewromanyk"
 version = "0.1.0"
 dependencies = [
  "anyhow",
