@@ -1,5 +1,5 @@
 use anyhow::Result;
-use recipe_parser::*;
+use recipe_parser_andrewromanyk::*;
 use std::fs::File;
 use std::io;
 use std::io::{BufRead, Write};
