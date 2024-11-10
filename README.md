@@ -3,16 +3,13 @@
 A parser for food recipes. Divides recipes into: name, description, ingredients and instructions.
 
 ## Parts of the recipe:
-- Dish name
+- Dish name <br>
 *Starts with the keyword followed by the name*
-
-- Dish description
+- Dish description<br>
 *Starts with the keyword followed by the description*
-
-- Needed ingredients
+- Needed ingredients<br>
 *A list of ingredients in the "ingredient - amount unit" form*
-
-- Steps how to make the dish
+- Steps how to make the dish<br>
 *A list of steps in the
 <br>- step1
 <br>- step2
