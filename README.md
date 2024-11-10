@@ -1,6 +1,10 @@
 # recipe_parser_andrewromanyk
 
 A parser for food recipes. Divides recipes into: name, description, ingredients and instructions.
+<br>
+[crates.io link](https://crates.io/crates/recipe_parser_andrewromanyk)
+<br>
+[docs.rs link](https://docs.rs/recipe_parser_andrewromanyk/0.1.2/recipe_parser_andrewromanyk/)
 
 ## Parts of the recipe:
 - Dish name <br>
