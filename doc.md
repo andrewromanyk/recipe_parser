@@ -11,7 +11,7 @@ Many of the rules under _Basic_ and recipe-ish rules are self-explanatory.
 Corresponds to any cyryllic or latin letter
 
 ```pest
-    myANY = { CYRILLIC | ASCII_ALPHA }
+myANY = { CYRILLIC | ASCII_ALPHA }
 ```
 
 ## spacedDelimiter
@@ -19,7 +19,7 @@ Corresponds to any cyryllic or latin letter
 Corresponds to a delimiter surrounded by 0 to 3 spaces
 
 ```pest
-    spacedDelimiter = {minimumSpaces ~ delimiter ~ minimumSpaces}
+spacedDelimiter = {minimumSpaces ~ delimiter ~ minimumSpaces}
 ```
 
 ## fullText
