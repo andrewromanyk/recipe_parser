@@ -3,28 +3,39 @@ anySpace = _{("\t" | " " | "\n")}
 anySpaces = _{ anySpace* } //WHITE_SPACE
 minimumSpaces = _{anySpace{0,3}}
 space = _{" "}
-myANY = _{ CYRILLIC | ASCII_ALPHA }
+myANY = { CYRILLIC | ASCII_ALPHA }
 delimiter = _{"-"}
 spacedDelimiter = _{minimumSpaces ~ delimiter ~ minimumSpaces}
 
-//Basic deriving
+// Basic deriving
 fullText = {myANY ~ (space* ~ myANY)*}
-textAfterSpace = {space? ~ fullText}
+textAfterSpace = _{space? ~ fullText}
 anyNumber = {ASCII_DIGIT+ ~ (("." | ",") ~ ASCII_DIGIT+)?}
 
-//Separate parts of the recipe
-recipeTitle = _{"Страва:"}
+// Separate parts of the recipe
+recipeTitle = _{("Страва:" | "Dish:")}
 recipeTitleFull = {anySpaces ~ recipeTitle ~ textAfterSpace}
 
-recipeDescription = _{"Опис:"}
+recipeDescription = _{("Опис:" | "Description:" | "Desc.:" | "Desc:")}
 recipeDescriptionFull = {anySpaces ~ recipeDescription ~ textAfterSpace}
 
-recipeIngredientsTitle = _{"Інгредієнти:"}
-amountAndUnit = {anyNumber ~ space ~ fullText}
+recipeIngredientsTitle = _{("Інгредієнти:" | "Ingredients:")}
+amountAndUnit = _{anyNumber ~ space ~ fullText}
 ingredientRow = {fullText ~ spacedDelimiter ~ amountAndUnit}
 recipeIngredientsFull = {anySpaces ~ recipeIngredientsTitle ~ (anySpaces ~ ingredientRow)+}
 
-recipeInstructionsTitle = _{"Приготування:" | "Рецепт:"}
+recipeInstructionsTitle = _{"Приготування:" | "Рецепт:" | "Кроки:" | "Steps:" | "How to make:" | "Recipe:"}
 recipeInstructionsFull = {anySpaces ~ recipeInstructionsTitle ~ (anySpaces ~ spacedDelimiter ~ fullText)+}
 
+// Full recipe
 recipeFull = {recipeTitleFull ~  recipeDescriptionFull ~ recipeIngredientsFull ~ recipeInstructionsFull}
+
+// Commands
+anyPlusSpecial = _{ASCII_ALPHA | "_" | "-"}
+filename = { anyPlusSpecial+ ~ ".txt" }
+PARSE = {"PARSE " ~ filename }
+HELP = { "HELP" }
+MENU = {"MENU"}
+LEAVE = {"LEAVE"}
+CREDITS = {"CREDITS"}
+listOfCommands = {HELP | MENU | LEAVE | PARSE | CREDITS}

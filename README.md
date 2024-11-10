@@ -1,18 +1,56 @@
-# Recipe parser
+# recipe_parser
 
-A simple parser for cooking recipes.
+A parser for food recipes. Divides recipes into: name, description, ingredients and instructions.
 
 ## Parts of the recipe:
-- Dish name
-- Dish description
+- Dish name 
+<br> 
+_Starts with the keyword followed by the name_
+- Dish description 
+<br>
+_Starts with the keyword followed by the description_
 - Needed ingredients
+<br>
+_A list of ingredients in the "_ingredient_ - *amount* _unit_" form_
 - Steps how to make the dish
+<br>
+_A list of steps in the <br> 
+\- step1
+<br>\- step2
+<br>\- step3
+<br> form_
 
-## Parsing:
-- **anySpace** corresponds to any amount of spaces, newlines and tabs
-- **title** and **text** -esque rules correspond to simple arrays of character: simple ascii and any respectively
-- **anyNumber** corresponds to a positive digit or real number that can be delimited with either a comma or a dot
-- **Title**, **Description**, **Ingredients** and **Instructions** use combinations of previously created rules to 
-create respective type: a simple text with spaces, a long text with any characters, a list of ingredients with their 
-amounts and measuring units, a list of instruction on how to cook a dish
-- **recipeFull** combines the latter to fully create a recipe
+## Process
+A recipe is parsed by being divided into 4 aforementioned parts, each having its own form.
+Many rules are "hidden" for easier parsing, e.g. spaces, separate letters, delimiters, etc.
+
+## Recipe example
+```
+Страва: Бутерброд з ковбасою
+
+Опис: простий бутерброд
+
+Інгредієнти:
+Ковбаса - 1 шт
+Сир - 1 уп
+Хліб - 1 скибка
+
+Кроки:
+- Нарізати ковбасу і покласти на хліб
+- Покласти сир на ковабсу
+```
+### Corresponds to
+
+```
+reicpeTitle = "Бутерброд з ковбасою"
+recipeDescription = "простий бутерброд"
+recipeIngredientsFull = [
+    ("Ковбаса", (1, "шт")),
+    ("Сир", (1, "уп")),
+    ("Хліб", (1, "скибка"))
+]
+recipeInstructionsFull = [
+    "Нарізати ковбасу і покласти на хліб",
+    "Покласти сир на ковабсу"
+]
+```

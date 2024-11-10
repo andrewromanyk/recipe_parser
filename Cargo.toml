@@ -3,8 +3,11 @@ name = "recipe_parser"
 version = "0.1.0"
 edition = "2021"
 description = "A parser for food recipes. Divides recipes into: name, description, ingredients and instructions."
+license = "MIT"
+readme = "README.md"
 
 [dependencies]
 anyhow = "1.0.91"
 pest = "2.7.14"
 pest_derive = "2.7.14"
+thiserror = "2.0.2"
