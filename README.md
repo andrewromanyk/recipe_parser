@@ -39,18 +39,39 @@ Many rules are "hidden" for easier parsing, e.g. spaces, separate letters, delim
 - Нарізати ковбасу і покласти на хліб
 - Покласти сир на ковабсу
 ```
-### Corresponds to
+### Corresponds to this diagram
 
 ```
-reicpeTitle = "Бутерброд з ковбасою"
-recipeDescription = "простий бутерброд"
-recipeIngredientsFull = [
-    ("Ковбаса", (1, "шт")),
-    ("Сир", (1, "уп")),
-    ("Хліб", (1, "скибка"))
-]
-recipeInstructionsFull = [
-    "Нарізати ковбасу і покласти на хліб",
-    "Покласти сир на ковабсу"
-]
+recipeFull
+├── recipeTitleFull
+│   ├── recipeTitle = "Страва:"
+│   └── textAfterSpace
+│       └── fullText = "Бутерброд з ковбасою"
+│
+├── recipeDescriptionFull
+│   ├── recipeDescription = "Опис:"
+│   └── textAfterSpace
+│       └── fullText простий бутерброд
+│
+├── recipeIngredientsFull
+│   ├── recipeIngredientsTitle = "Інгредієнти:"
+│   ├── ingredientRow
+│   │   ├── fullText = "Ковбаса"
+│   │   └── amountAndUnit
+│   │       ├── anyNumber = 1
+│   │       └── fullText = "шт"
+│   ├── ingredientRow
+│   │   ├── fullText = "Сир"
+│   │   └── amountAndUnit
+│   │       ├── anyNumber = 1
+│   │       └── fullText = "уп"
+│   └── ingredientRow
+│       ├── fullText = "Хліб"
+│       └── amountAndUnit
+│           ├── anyNumber = 1
+│           └── fullText = "скибка"
+└── recipeInstructionsFull
+    └── recipeInstructionsTitle = "Кроки:"
+        ├── fullText = "Нарізати ковбасу і покласти на хліб"
+        └── fullText = "Покласти сир на ковабсу"
 ```
